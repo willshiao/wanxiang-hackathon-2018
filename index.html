@@ -1,0 +1,127 @@
+<!--Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Trendy Signup Form Flat Responsive Widget Template :: w3layouts</title>
+<!-- Custom Theme files -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="keywords" content="Trendy Signup Form Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!-- //for-mobile-apps -->
+<!-- font-awesome icons -->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+<!-- //font-awesome icons -->
+<!--Google Fonts-->
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<script src="js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<div class="wthree-dot">
+	<h1>Sign Up</h1>
+	<div class="profile">
+		<div class="wrap">
+			<div class="wthree-grids">
+				<div class="content-left">
+					<div class="content-info">
+						<h2>Brief History About Us</h2>
+						<div class="slider">
+							<div class="callbacks_container">
+								<ul class="rslides callbacks callbacks1" id="slider4">
+									<li>
+										<div class="w3layouts-banner-info">
+											<h3>Bringing Urban Mobility to masses</h3>
+											<p>Urban Mobility Services for the people by the people. Open Governance</p>
+										</div>
+									</li>
+									<li>
+										<div class="w3layouts-banner-info">
+											<h3>Urban Mobiltiy</h3>
+											<p>Urban Mobi io</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="clear"> </div>
+						</div>
+						<div class="agileinfo-follow">
+							<h4>Sign Up with</h4>
+						</div>
+						<div class="agileinfo-social-grids">
+							<ul>
+								<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+							</ul>
+						</div>
+						<div class="agile-signin">
+							<h4>Already have an account <a href="#" id ="sign-in-btn">Sign In</a></h4>
+						</div>
+					</div>
+				</div>
+				<div class="content-main" >
+					<div class="w3ls-subscribe" id="sign-up-page">
+						<h4>New Customer?</h4>
+						<form action="#" method="post">
+							<input type="text" name="Search" placeholder="First Name" required="">
+							<input type="text" name="Search" placeholder="Last Name" required="">
+							<input type="email" name="Search" placeholder="Email" required="">
+							<input type="password" name="Password" placeholder="Password" required="">
+							<input type="password" name="Password" placeholder="Confirm Password" required="">
+							<input type="submit" value="Sign Up">
+						</form>
+					</div>
+					<div class="w3ls-subscribe" id="sign-in-page" style="visibility: hidden;">
+							<h4>Sign In</h4>
+							<form action="#" method="post">
+								<input type="email" name="Search" placeholder="Email" required="">
+								<input type="password" name="Password" placeholder="Password" required="">
+								<input type="submit" value="Sign In">
+							</form>
+						</div>
+				</div>
+				<div class="clear"> </div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/responsiveslides.min.js"></script>
+									<script>
+										// You can also use "$(window).load(function() {"
+										$(function () {
+											let showSignIn = true;
+											$('#sign-in-btn').click((evt) => {
+												evt.preventDefault();
+												if(showSignIn === true){
+													showSignIn =false;
+												}
+												if(showSignIn === false){
+													document.getElementById('sign-up-page').style.display = 'none';
+													document.getElementById('sign-in-page').style.visibility = 'visible';	
+												}
+											})
+										  // Slideshow 4
+										  $("#slider4").responsiveSlides({
+											auto: true,
+											pager:true,
+											nav:false,
+											speed: 400,
+											namespace: "callbacks",
+											before: function () {
+											  $('.events').append("<li>before event fired.</li>");
+											},
+											after: function () {
+											  $('.events').append("<li>after event fired.</li>");
+											}
+										  });
+									
+										});
+
+									 </script>
+									<!--banner Slider starts Here-->
+</body>
+</html>
