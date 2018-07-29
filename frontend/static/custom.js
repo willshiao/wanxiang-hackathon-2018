@@ -34,7 +34,7 @@ async function hasReserved () {
  * Begin blockchain stuff
  */
 
-const address = '0xbf5f9689276b441d9f9ee39b028d7743c0a6cf1b'
+const address = '0x18bedb90f28edd289267bd1b772acb4d405368e4'
 
 if (abi === undefined) {
   console.error('abi not found')

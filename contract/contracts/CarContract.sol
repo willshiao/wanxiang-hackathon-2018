@@ -10,7 +10,7 @@ contract CarContract is Ownable {
         address indexed driver,
         bool carReserved,
         uint time,
-        string indexed component
+        string component
     );
     
     event NewCar (
@@ -20,12 +20,12 @@ contract CarContract is Ownable {
     event ReserveCar (
         uint indexed carId,
         address indexed reservedBy,
-        string indexed location
+        string location
     );
     
     event ReturnCar (
         uint indexed carId,
-        string indexed location
+        string location
     );
     
     struct Car {
