@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>Reserve a Ride</title>
+
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+  />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="static/custom.css">
+  <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+  <div class="image-container set-full-height" style="background-image: url('/img/wizard-book.jpg')">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 logo-container">
+          <div class="logo">
+            <img src="/img/new_logo.png">
+          </div>
+          <div class="brand">
+            Jetson
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--   Big container   -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <!-- Wizard container -->
+          <div class="wizard-container">
+            <div class="card wizard-card" data-color="red" id="wizard">
+              <!-- <form action="" method="" id="submit-form"> -->
+              <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
+
+              <div class="wizard-header">
+                <h3 class="wizard-title">
+                  Anomaly Detection
+                </h3>
+                <h5>Keeping driver safety in mind.</h5>
+              </div>
+              <div class="wizard-body mr-3 ml-3" id="reserve-return">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h4 class="info-text">Simulate Log Anomaly</h4>
+                  </div>
+                  <div class="col-sm-12">
+                    <form action="" id="anomaly-form">
+                      <div class="row">
+                        
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10 center-block text-center" id="anomaly-col">
+                          <div class="form-group label-floating">
+                            <input name="anomalyComponent" type="text" class="form-control" id="part-number" placeholder="Part Name">
+                          </div>
+                          <button class="btn btn-fill btn-success btn-wd" id="btn-register">Register</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wizard-footer">
+              <!--<div class="pull-right">
+                  <input type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='next' value='Next' />
+                  <input type='button' class='btn btn-finish btn-fill btn-danger btn-wd' name='finish' value='Finish' />
+                </div>
+                <div class="pull-left">
+                  <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                  
+                  
+                </div>
+              -->
+              <div class="clearfix"></div>
+            </div>
+            <!-- </form> -->
+          </div>
+        </div>
+        <!-- wizard container -->
+      </div>
+    </div>
+    <!-- row -->
+  </div>
+  <!--  big container -->
+
+  <div class="footer">
+    <div class="container text-center">
+      Made with
+      <i class="fa fa-heart heart"></i> by
+      <label for="">Jetson</label>.
+    </div>
+  </div>
+  </div>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+  <script src="/static/main.js"></script>
+  <script src="/js/abi.js"></script>
+  <script src="/static/anomaly.js"></script>
+</body>
+
+</html>
