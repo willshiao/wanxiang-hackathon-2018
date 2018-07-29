@@ -81,13 +81,13 @@
                 <div class="wizard-navigation">
                   <ul>
                     <li>
-                      <a href="#reserve-return" data-toggle="tab">Anomaly</a>
+                      <a href="#anomaly" data-toggle="tab">Anomaly</a>
                     </li>
                     <li>
-                      <a href="#history" data-toggle="tab" id="history-tab">Trafic Violation</a>
+                      <a href="#violation" data-toggle="tab" id="history-tab">Trafic Violation</a>
                     </li>
                     <li>
-                      <a href="#description" data-toggle="tab">Dashboard</a>
+                      <a href="#dashboard" data-toggle="tab">Dashboard</a>
                     </li>
                   </ul>
                 </div>
@@ -128,15 +128,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="tab-pane" id="description">
+                  <div class="tab-pane" id="dashboard">
                     <div class="row">
-                      <h4 class="info-text"> Personal Info:</h4>
-                      <div class="col-sm-8 col-sm-offset-1">
-                        <h4>
-                          <label>Name: </label>
-                          <span class="pull-right label label-info ml-auto">Usr Name</span>
-                        </h4>
-                      </div>
+                      <h4 class="info-text"> Usage:</h4>
+                      <canvas id="myChart"></canvas>
                     </div>
                   </div>
                 </div>
@@ -177,6 +172,7 @@
     <script src="/js/web3.min.js"></script>
     <script src="/static/main.js"></script>
     <script src="/js/abi.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="/static/admin.js"></script>
 </body>
 
