@@ -19,11 +19,13 @@ contract CarContract is Ownable {
     
     event ReserveCar (
         uint indexed carId,
-        address indexed reservedBy
+        address indexed reservedBy,
+        string indexed location
     );
     
     event ReturnCar (
-        uint indexed carId
+        uint indexed carId,
+        string indexed location
     );
     
     struct Car {
@@ -95,7 +97,7 @@ contract CarContract is Ownable {
         revert();
     }
     
-    function reserveCar (uint _carId) public payable returns (uint) {
+    function reserveCar (uint _carId, string _location) public payable returns (uint) {
         require(!fleet[_carId].reserved && !fleet[_carId].disabled && msg.value >= fleet[_carId].price);
         require(!hasReservation[msg.sender]);
         
@@ -109,15 +111,15 @@ contract CarContract is Ownable {
         fleet[_carId].reservedTo = msg.sender;
         hasReservation[msg.sender] = true;
 
-        emit ReserveCar(_carId, msg.sender);
+        emit ReserveCar(_carId, msg.sender, _location);
     }
     
-    function returnCar (uint _carId) public {
+    function returnCar (uint _carId, string _location) public {
         // Make sure the right person is returning the car
         require(fleet[_carId].reservedTo == msg.sender);
         fleet[_carId].reserved = false;
         hasReservation[msg.sender] = false;
 
-        emit ReturnCar(_carId);
+        emit ReturnCar(_carId, _location);
     }
 }
