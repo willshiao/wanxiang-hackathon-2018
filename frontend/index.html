@@ -1,23 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>Reserve a Ride</title>
+
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+  />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="static/custom.css">
+  <link rel="stylesheet" href="static/style.css">
 </head>
 
 <body>
-  <p>Current count: <span id="count">??</span>
-  </p>
-  <button id="getcount">Get current count</button>
-  <button id="increment">Increment count</button>
-  <button id="reserve-btn">Reserve Ride</button>
-  <div id="log"></div>
+  <div class="image-container set-full-height" style="background-image: url('/img/wizard-book.jpg')">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 logo-container">
+          <div class="logo">
+            <img src="/img/new_logo.png">
+          </div>
+          <div class="brand">
+            Jetson
+          </div>
+        </div>
+        <div class="d-flex nav-item dropdown" style="
+        right: 120px;
+        position: absolute;
+        top: 20px;
+        z-index: 3;
+        ">
+          <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-bell" aria-hidden="true" style="font-size: 20px; color: honeydew;"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="head text-light bg-dark">
+              <div class="row">
+                <div class="col-lg-12 col-sm-12 col-12">
+                  <span>Notifications (3)</span>
+                  <a href="" class="float-right text-light">Mark all as read</a>
+                </div>
+            </li>
+            <li class="notification-box">
+              <div class="row">
+                <div class="col-lg-8 col-sm-8 col-8">
+                  <strong class="text-info">David John</strong>
+                  <div>
+                    Lorem ipsum dolor sit amet, consectetur
+                  </div>
+                  <small class="text-warning">27.11.2015, 15:00</small>
+                </div>
+              </div>
+            </li>
+            <li class="footer bg-dark text-center">
+              <a href="" class="text-light">View All</a>
+            </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <!--   Big container   -->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <!-- Wizard container -->
+            <div class="wizard-container">
+              <div class="card wizard-card" data-color="red" id="wizard">
+                <!-- <form action="" method="" id="submit-form"> -->
+                <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="/js/web3.min.js"></script>
-  <script src="/js/abi.js"></script>
-  <script src="/js/index.js"></script>
+                <div class="wizard-header">
+                  <h3 class="wizard-title">
+                    Reserve a Ride
+                  </h3>
+                  <h5>Open governance ride share, so you can share the moment.</h5>
+                </div>
+                <div class="wizard-navigation">
+                  <ul>
+                    <li>
+                      <a href="#reserve-return" data-toggle="tab">Reserve/Return</a>
+                    </li>
+                    <li>
+                      <a href="#history" data-toggle="tab" id="history-tab">History</a>
+                    </li>
+                    <li>
+                      <a href="#description" data-toggle="tab">Personal Info</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="tab-content">
+                  <div class="tab-pane" id="reserve-return">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <h4 class="info-text"> Let's ride</h4>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="row">
+                          <form action="" id="submit-form">
+                            <div class="col-sm-6" id="book-col" style="display: none;">
+                              <div class="form-group label-floating">
+                                <label class="control-label">Current Location</label>
+                                <input name="currentLocation" type="text" class="form-control" id="current-location">
+                              </div>
+                              <button class="btn btn-fill btn-success btn-wd" id="btn-book-ride">Book Ride</button>
+                            </div>
+                          </form>
+
+                          <form action="" id="return-form">
+                            <div class="col-sm-6" id="return-col" style="display: none;">
+                              <div class="form-group label-floating">
+                                <label class="control-label">Current Location</label>
+                                <input name="returnLocation" type="text" class="form-control" id="return-location">
+                              </div>
+                              <button class="btn btn-fill btn-success btn-wd" id="btn-return-ride">Return Ride</button>
+                            </div>
+                          </form>
+
+                          <div class="col-sm-6" id="out-details"></div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="history">
+                    <h4 class="info-text">Ride History</h4>
+                    <div class="row">
+                      <div class="col-sm-10 col-sm-offset-1">
+                        <table id="history-table" class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">Car ID</th>
+                              <th scope="col">Location</th>
+                              <th scope="col">Reserved By</th>
+                            </tr>
+                          </thead>
+                          <tbody id="history-table-body">
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="description">
+                    <div class="row">
+                      <h4 class="info-text"> Personal Info:</h4>
+                      <div class="col-sm-8 col-sm-offset-1">
+                        <h4>
+                          <label>Name: </label>
+                          <span class="pull-right label label-info ml-auto">Usr Name</span>
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wizard-footer">
+                  <!--<div class="pull-right">
+                  <input type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='next' value='Next' />
+                  <input type='button' class='btn btn-finish btn-fill btn-danger btn-wd' name='finish' value='Finish' />
+                </div>
+                <div class="pull-left">
+                  <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                  
+                  
+                </div>
+              -->
+                  <div class="clearfix"></div>
+                </div>
+                <!-- </form> -->
+              </div>
+            </div>
+            <!-- wizard container -->
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!--  big container -->
+
+      <div class="footer">
+        <div class="container text-center">
+          Made with
+          <i class="fa fa-heart heart"></i> by
+          <label for="">Six</label>.
+        </div>
+      </div>
+    </div>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+    <script src="/js/web3.min.js"></script>
+    <script src="/static/main.js"></script>
+    <script src="/js/abi.js"></script>
+    <script src="/static/custom.js"></script>
 </body>
 
 </html>
