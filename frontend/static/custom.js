@@ -18,11 +18,12 @@ function populateCarInfo (id) {
   const cardNum = btoa((carId + 777) * 777).slice(0, 6).toUpperCase()
   const carManufacturer = Number(String(carId).slice(4, 6)) % 9
 
-  document.getElementById('out-details').innerHTML = `<label>Car ID: ${carId}</label>
+  $('#out-details').html(`
+    <label>Car ID: ${carId}</label>
     </br>
     <label>License Plate: ${cardNum}</label>
     </br>
-    <label>Car Model: ${carDetails[carManufacturer]}</label>`
+    <label>Car Model: ${carDetails[carManufacturer]}</label>`)
 }
 
 async function hasReserved () {
@@ -67,8 +68,18 @@ if (typeof (web3) === 'undefined') {
 $('#return-form').submit(async (evt) => {
   evt.preventDefault()
   await promisify(cb => CarContract.returnCar(reservedCarId, $('#return-location').val(), cb))
+
   $('#book-col').show()
   $('#return-col').hide()
+  $('#out-details').html('')
+})
+
+$('#history-tab').click(async evt => {
+  console.log('Triggered')
+  CarContract.ReserveCar({}, { fromBlock: 0, toBlock: 'latest' }).get((err, evtResult) => {
+    if (err) console.error(err)
+    console.log(evtResult)
+  })
 })
 
 $('#submit-form').submit(async (evt) => {
