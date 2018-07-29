@@ -28,326 +28,358 @@ function waitForReceipt (hash, cb) {
 }
 
 // var address = "0xf15090c01bec877a122b567e5552504e5fd22b79"
-const address = '0x12f7eaea24fbf5deafeb470e0b1e846f0efbaf5d'
+const address = '0xfdfa19c8a971e3203a9989ae878fe42c64451f0a'
 const abi = [
   {
-    'anonymous': false,
-    'inputs': [
-      {
-        'indexed': true,
-        'name': 'carId',
-        'type': 'uint256'
-      },
-      {
-        'indexed': true,
-        'name': 'driver',
-        'type': 'address'
-      },
-      {
-        'indexed': false,
-        'name': 'carReserved',
-        'type': 'bool'
-      },
-      {
-        'indexed': false,
-        'name': 'time',
-        'type': 'uint256'
-      },
-      {
-        'indexed': true,
-        'name': 'component',
-        'type': 'string'
-      }
-    ],
-    'name': 'Anomaly',
-    'type': 'event'
+    "constant": false,
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    'constant': false,
-    'inputs': [
+    "constant": true,
+    "inputs": [
       {
-        'name': '_numSeats',
-        'type': 'uint8'
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "fleet",
+    "outputs": [
+      {
+        "name": "numSeats",
+        "type": "uint8"
       },
       {
-        'name': '_price',
-        'type': 'uint256'
-      }
-    ],
-    'name': 'createCar',
-    'outputs': [],
-    'payable': false,
-    'stateMutability': 'nonpayable',
-    'type': 'function'
-  },
-  {
-    'constant': false,
-    'inputs': [
-      {
-        'name': '_component',
-        'type': 'string'
-      }
-    ],
-    'name': 'logAnomaly',
-    'outputs': [],
-    'payable': false,
-    'stateMutability': 'nonpayable',
-    'type': 'function'
-  },
-  {
-    'anonymous': false,
-    'inputs': [
-      {
-        'indexed': true,
-        'name': 'carId',
-        'type': 'uint256'
-      }
-    ],
-    'name': 'NewCar',
-    'type': 'event'
-  },
-  {
-    'constant': false,
-    'inputs': [
-      {
-        'name': '_carId',
-        'type': 'uint256'
-      }
-    ],
-    'name': 'removeCar',
-    'outputs': [],
-    'payable': false,
-    'stateMutability': 'nonpayable',
-    'type': 'function'
-  },
-  {
-    'constant': false,
-    'inputs': [],
-    'name': 'renounceOwnership',
-    'outputs': [],
-    'payable': false,
-    'stateMutability': 'nonpayable',
-    'type': 'function'
-  },
-  {
-    'constant': false,
-    'inputs': [
-      {
-        'name': '_carId',
-        'type': 'uint256'
-      }
-    ],
-    'name': 'reserveCar',
-    'outputs': [
-      {
-        'name': '',
-        'type': 'uint256'
-      }
-    ],
-    'payable': true,
-    'stateMutability': 'payable',
-    'type': 'function'
-  },
-  {
-    'anonymous': false,
-    'inputs': [
-      {
-        'indexed': true,
-        'name': 'carId',
-        'type': 'uint256'
+        "name": "price",
+        "type": "uint256"
       },
       {
-        'indexed': true,
-        'name': 'reservedBy',
-        'type': 'address'
+        "name": "reserved",
+        "type": "bool"
+      },
+      {
+        "name": "disabled",
+        "type": "bool"
+      },
+      {
+        "name": "reservationTime",
+        "type": "uint256"
+      },
+      {
+        "name": "reservedTo",
+        "type": "address"
       }
     ],
-    'name': 'ReserveCar',
-    'type': 'event'
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    'constant': false,
-    'inputs': [
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
       {
-        'name': '_carId',
-        'type': 'uint256'
+        "name": "",
+        "type": "address"
       }
     ],
-    'name': 'returnCar',
-    'outputs': [],
-    'payable': false,
-    'stateMutability': 'nonpayable',
-    'type': 'function'
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    'anonymous': false,
-    'inputs': [
+    "constant": false,
+    "inputs": [
       {
-        'indexed': true,
-        'name': 'carId',
-        'type': 'uint256'
+        "name": "_newOwner",
+        "type": "address"
       }
     ],
-    'name': 'ReturnCar',
-    'type': 'event'
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    'anonymous': false,
-    'inputs': [
+    "anonymous": false,
+    "inputs": [
       {
-        'indexed': true,
-        'name': 'previousOwner',
-        'type': 'address'
+        "indexed": true,
+        "name": "carId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "driver",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "carReserved",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "name": "time",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "component",
+        "type": "string"
       }
     ],
-    'name': 'OwnershipRenounced',
-    'type': 'event'
+    "name": "Anomaly",
+    "type": "event"
   },
   {
-    'anonymous': false,
-    'inputs': [
+    "anonymous": false,
+    "inputs": [
       {
-        'indexed': true,
-        'name': 'previousOwner',
-        'type': 'address'
-      },
-      {
-        'indexed': true,
-        'name': 'newOwner',
-        'type': 'address'
+        "indexed": true,
+        "name": "carId",
+        "type": "uint256"
       }
     ],
-    'name': 'OwnershipTransferred',
-    'type': 'event'
+    "name": "NewCar",
+    "type": "event"
   },
   {
-    'constant': false,
-    'inputs': [
+    "anonymous": false,
+    "inputs": [
       {
-        'name': '_newOwner',
-        'type': 'address'
+        "indexed": true,
+        "name": "carId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "reservedBy",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "location",
+        "type": "string"
       }
     ],
-    'name': 'transferOwnership',
-    'outputs': [],
-    'payable': false,
-    'stateMutability': 'nonpayable',
-    'type': 'function'
+    "name": "ReserveCar",
+    "type": "event"
   },
   {
-    'constant': true,
-    'inputs': [
+    "anonymous": false,
+    "inputs": [
       {
-        'name': '_numSeats',
-        'type': 'uint8'
+        "indexed": true,
+        "name": "carId",
+        "type": "uint256"
       },
       {
-        'name': '_maxCost',
-        'type': 'uint256'
+        "indexed": true,
+        "name": "location",
+        "type": "string"
       }
     ],
-    'name': 'findCar',
-    'outputs': [
-      {
-        'name': '',
-        'type': 'uint256'
-      }
-    ],
-    'payable': false,
-    'stateMutability': 'view',
-    'type': 'function'
+    "name": "ReturnCar",
+    "type": "event"
   },
   {
-    'constant': true,
-    'inputs': [
+    "anonymous": false,
+    "inputs": [
       {
-        'name': '',
-        'type': 'uint256'
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
       }
     ],
-    'name': 'fleet',
-    'outputs': [
-      {
-        'name': 'numSeats',
-        'type': 'uint8'
-      },
-      {
-        'name': 'price',
-        'type': 'uint256'
-      },
-      {
-        'name': 'reserved',
-        'type': 'bool'
-      },
-      {
-        'name': 'disabled',
-        'type': 'bool'
-      },
-      {
-        'name': 'reservationTime',
-        'type': 'uint256'
-      },
-      {
-        'name': 'reservedTo',
-        'type': 'address'
-      }
-    ],
-    'payable': false,
-    'stateMutability': 'view',
-    'type': 'function'
+    "name": "OwnershipRenounced",
+    "type": "event"
   },
   {
-    'constant': true,
-    'inputs': [
+    "anonymous": false,
+    "inputs": [
       {
-        'name': '_carId',
-        'type': 'uint256'
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "newOwner",
+        "type": "address"
       }
     ],
-    'name': 'getCar',
-    'outputs': [
-      {
-        'name': '',
-        'type': 'uint8'
-      },
-      {
-        'name': '',
-        'type': 'uint256'
-      },
-      {
-        'name': '',
-        'type': 'bool'
-      },
-      {
-        'name': '',
-        'type': 'bool'
-      },
-      {
-        'name': '',
-        'type': 'uint256'
-      },
-      {
-        'name': '',
-        'type': 'address'
-      }
-    ],
-    'payable': false,
-    'stateMutability': 'view',
-    'type': 'function'
+    "name": "OwnershipTransferred",
+    "type": "event"
   },
   {
-    'constant': true,
-    'inputs': [],
-    'name': 'owner',
-    'outputs': [
+    "constant": false,
+    "inputs": [
       {
-        'name': '',
-        'type': 'address'
+        "name": "_numSeats",
+        "type": "uint8"
+      },
+      {
+        "name": "_price",
+        "type": "uint256"
       }
     ],
-    'payable': false,
-    'stateMutability': 'view',
-    'type': 'function'
+    "name": "createCar",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_component",
+        "type": "string"
+      }
+    ],
+    "name": "logAnomaly",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_carId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getCar",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bool"
+      },
+      {
+        "name": "",
+        "type": "bool"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_carId",
+        "type": "uint256"
+      }
+    ],
+    "name": "removeCar",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "hasReserved",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_numSeats",
+        "type": "uint8"
+      },
+      {
+        "name": "_maxCost",
+        "type": "uint256"
+      }
+    ],
+    "name": "findCar",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_carId",
+        "type": "uint256"
+      },
+      {
+        "name": "_location",
+        "type": "string"
+      }
+    ],
+    "name": "reserveCar",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_carId",
+        "type": "uint256"
+      },
+      {
+        "name": "_location",
+        "type": "string"
+      }
+    ],
+    "name": "returnCar",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]
 
@@ -392,4 +424,3 @@ $('#increment').click(async (e) => {
   const res = await promisify(cb => CarContract.getCar(0, cb))
   console.log(res)
 })
-
