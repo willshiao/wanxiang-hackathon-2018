@@ -34,8 +34,6 @@ async function hasReserved () {
  * Begin blockchain stuff
  */
 
-const address = '0xbf5f9689276b441d9f9ee39b028d7743c0a6cf1b'
-
 if (abi === undefined) {
   console.error('abi not found')
 }
@@ -57,38 +55,85 @@ async function showFields () {
 
 if (typeof (web3) === 'undefined') {
   console.error('Unable to find web3. ' +
-    'Please run MetaMask (or something else that injects web3).')
+  'Please run MetaMask (or something else that injects web3).')
+  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"))
+  CarContract = web3.eth.contract(abi).at(address)
+  showFields()
 } else {
   web3 = new Web3(web3.currentProvider)
   CarContract = web3.eth.contract(abi).at(address)
   showFields()
 }
 
+function handleError (err) {
+  Swal({
+    title: 'Error',
+    text: 'An error occurred: ' + err.message,
+    type: 'error'
+  })
+}
+
 // Return button clicked
 $('#return-form').submit(async (evt) => {
   evt.preventDefault()
-  await promisify(cb => CarContract.returnCar(reservedCarId, $('#return-location').val(), cb))
+  try {
+    await promisify(cb => CarContract.returnCar(reservedCarId, $('#return-location').val(), cb))
 
-  $('#book-col').show()
-  $('#return-col').hide()
-  $('#out-details').html('')
+    $('#book-col').show()
+    $('#return-col').hide()
+    $('#out-details').html('')
+    Swal({
+      title: 'Success!',
+      text: 'Successfully returned ride!',
+      type: 'success'
+    })
+    $('#return-location').val('')
+  } catch (e) {
+    handleError(e)
+  }
 })
+
+function createTableRow(data) {
+  if (data.args !== undefined) data = data.args
+  $('#history-table-body').prepend(`<tr><td>${data.carId}</td><td>${data.location}</td><td>${data.reservedBy}</td></tr>`)
+}
 
 $('#history-tab').click(async evt => {
   console.log('Triggered')
   CarContract.ReserveCar({}, { fromBlock: 0, toBlock: 'latest' }).get((err, evtResult) => {
     if (err) console.error(err)
     console.log(evtResult)
+    $('#history-table-body').html('')
+    evtResult.forEach(createTableRow)
+  })
+  
+  CarContract.ReserveCar().watch((err, result) => {
+    if (err) console.error(err)
+    console.log('Got event: ', result)
+    
+    const args = result.args
+    createTableRow(args)
   })
 })
 
+// Reserve a ride
 $('#submit-form').submit(async (evt) => {
   evt.preventDefault()
-  const carId = await promisify(cb => CarContract.findCar(2, 1e10, cb))
-  console.log('Found free car:', carId.toString())
-  const res = await promisify(cb => CarContract.reserveCar(carId, $('#current-location').val(), { value: 10000 }, cb))
-  populateCarInfo(carId)
-  
-  $('#book-col').hide()
-  $('#return-col').show()
+  try {
+    carId = await promisify(cb => CarContract.findCar(2, 1e10, cb))
+    console.log('Found free car:', carId.toString())
+    const res = await promisify(cb => CarContract.reserveCar(carId, $('#current-location').val(), { value: 10000 }, cb))
+    populateCarInfo(carId)
+    
+    $('#book-col').hide()
+    $('#return-col').show()
+    Swal({
+      title: 'Success!',
+      text: 'Successfully reserved ride!',
+      type: 'success'
+    })
+    $('#current-location').val('')
+  } catch (e) {
+    handleError(e)
+  }
 })
