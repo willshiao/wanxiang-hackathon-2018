@@ -30,7 +30,7 @@ async function populateTable () {
       console.log('Got event: ', evt)
 
       const rowNode = table.row
-        .add([ evt.args.carId, evt.args.component, new Date(evt.args.time * 1000) ])
+        .add([ evt.args.carId, evt.args.component, new Date(parseInt(evt.args.time.toString()) * 1000) ])
         .draw()
         // .node()
       // $(rowNode)
