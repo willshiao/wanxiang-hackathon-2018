@@ -74,11 +74,26 @@ $('#return-form').submit(async (evt) => {
   $('#out-details').html('')
 })
 
+function createTableRow(data) {
+  if (data.args !== undefined) data = data.args
+  $('#history-table-body')
+    .prepend(`<tr><td>${data.carId}</td><td>${data.location}</td><td>${data.reservedBy}</td></tr>`)
+}
+
 $('#history-tab').click(async evt => {
   console.log('Triggered')
   CarContract.ReserveCar({}, { fromBlock: 0, toBlock: 'latest' }).get((err, evtResult) => {
     if (err) console.error(err)
     console.log(evtResult)
+    evtResult.forEach(createTableRow)
+  })
+
+  CarContract.ReserveCar().watch((err, result) => {
+    if (err) console.error(err)
+    console.log('Got event: ', result)
+    
+    const args = result.args
+    createTableRow(args)
   })
 })
 
