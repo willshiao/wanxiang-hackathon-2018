@@ -79,6 +79,10 @@ contract CarContract is Ownable {
     function removeCar (uint _carId) public onlyOwner {
         fleet[_carId].disabled = false;
     }
+
+    function hasReserved () public view returns (bool) {
+        return hasReservation[msg.sender];
+    }
     
     function findCar (uint8 _numSeats, uint _maxCost) public view returns (uint) {
         for (uint i = 0; i < fleet.length; ++i) {
