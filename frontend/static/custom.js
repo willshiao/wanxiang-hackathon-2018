@@ -18,9 +18,9 @@ function populateCarInfo (id) {
   const cardNum = btoa((carId + 777) * 777).slice(0, 6).toUpperCase()
   const carManufacturer = Number(String(carId).slice(4, 6)) % 9
 
-  document.getElementById('out-details').innerHTML = `<label>Car Id: ${carId}</label>
+  document.getElementById('out-details').innerHTML = `<label>Car ID: ${carId}</label>
     </br>
-    <label>Car Num: ${cardNum}</label>
+    <label>License Plate: ${cardNum}</label>
     </br>
     <label>Car Model: ${carDetails[carManufacturer]}</label>`
 }
@@ -33,18 +33,23 @@ async function hasReserved () {
  * Begin blockchain stuff
  */
 
-const address = '0xfdfa19c8a971e3203a9989ae878fe42c64451f0a'
+const address = '0xbf5f9689276b441d9f9ee39b028d7743c0a6cf1b'
 
 if (abi === undefined) {
   console.error('abi not found')
 }
 
+let reservedCarId = -1
+
 async function showFields () {
   if (await hasReserved()) {
+    console.log('Has reserved vehicle')
     $('#return-col').show()
     const carId = await promisify(cb => CarContract.getReserved(cb))
     populateCarInfo(carId)
+    reservedCarId = carId
   } else {
+    console.log('Don\'t have reserved vehicle')
     $('#book-col').show()
   }
 }
@@ -59,8 +64,11 @@ if (typeof (web3) === 'undefined') {
 }
 
 // Return button clicked
-$('#btn-return-ride').click((evt) => {
-  promisify(cb => CarContract.returnCar())
+$('#return-form').submit(async (evt) => {
+  evt.preventDefault()
+  await promisify(cb => CarContract.returnCar(reservedCarId, $('#return-location').val(), cb))
+  $('#book-col').show()
+  $('#return-col').hide()
 })
 
 $('#submit-form').submit(async (evt) => {
@@ -69,4 +77,7 @@ $('#submit-form').submit(async (evt) => {
   console.log('Found free car:', carId.toString())
   const res = await promisify(cb => CarContract.reserveCar(carId, $('#current-location').val(), { value: 10000 }, cb))
   populateCarInfo(carId)
+  
+  $('#book-col').hide()
+  $('#return-col').show()
 })
