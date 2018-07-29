@@ -56,8 +56,11 @@ async function showFields () {
 }
 
 if (typeof (web3) === 'undefined') {
-  console.error('Unable to find web3. ' +
-    'Please run MetaMask (or something else that injects web3).')
+  // console.error('Unable to find web3. ' +
+  // 'Please run MetaMask (or something else that injects web3).')
+  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"))
+  CarContract = web3.eth.contract(abi).at(address)
+  showFields()
 } else {
   web3 = new Web3(web3.currentProvider)
   CarContract = web3.eth.contract(abi).at(address)
@@ -86,6 +89,7 @@ $('#return-form').submit(async (evt) => {
       text: 'Successfully returned ride!',
       type: 'success'
     })
+    $('#return-location').val('')
   } catch (e) {
     handleError(e)
   }
@@ -114,6 +118,7 @@ $('#history-tab').click(async evt => {
   })
 })
 
+// Reserve a ride
 $('#submit-form').submit(async (evt) => {
   evt.preventDefault()
   try {
@@ -129,6 +134,7 @@ $('#submit-form').submit(async (evt) => {
       text: 'Successfully reserved ride!',
       type: 'success'
     })
+    $('#current-location').val('')
   } catch (e) {
     handleError(e)
   }
