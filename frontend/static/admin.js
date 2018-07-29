@@ -14,7 +14,7 @@ async function populateTable () {
   CarContract.Anomaly({}, { fromBlock: 0, toBlock: 'latest' }).get((err, evts) => {
     if (err) console.error(err)
     evts.forEach(evt => s.add(evt.transactionHash))
-    const data = evts.map(evt => [evt.args.carId, evt.args.component])
+    const data = evts.map(evt => [evt.args.carId, evt.args.component, new Date(evt.args.time * 1000)])
     console.log(data)
 
     const table = $('#anomaly-table').DataTable({
@@ -30,7 +30,7 @@ async function populateTable () {
       console.log('Got event: ', evt)
 
       const rowNode = table.row
-        .add([ evt.args.carId, evt.args.component ])
+        .add([ evt.args.carId, evt.args.component, new Date(evt.args.time * 1000) ])
         .draw()
         // .node()
       // $(rowNode)
