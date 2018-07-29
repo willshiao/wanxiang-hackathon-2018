@@ -28,14 +28,11 @@ contract('CarContract', function (accounts) {
     assert.equal(res[3], false)
   })
 
-  it('should allow a user to get cars', async function () {
+  it('should allow a user to reserve cars', async function () {
     const instance = await CarContract.deployed()
-    await instance.createCar(1, 100)
-    const res = await instance.getCar(0)
-    assert.equal(res[0], 1)
-    assert.equal(res[1], 100)
-    assert.equal(res[2], false)
-    assert.equal(res[3], false)
+    await addCars(instance)
+
+    await instance.reserveCar(1)
   })
 
   // it('should put 10000 CarContract in the first account', function () {
