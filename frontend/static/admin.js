@@ -1,21 +1,4 @@
-var ctx = document.getElementById('myChart').getContext('2d');
-data = {
-    datasets: [{
-        data: [10, 20, 30]
-    }],
-
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-        'Red',
-        'Yellow',
-        'Blue'
-    ]
-};
-var myPieChart = new Chart(ctx,{
-    type: 'pie',
-    data: data,
-    options: {}
-});
+const ctx = document.getElementById('myChart').getContext('2d')
 
 if (typeof (web3) === 'undefined') {
   console.error('Unable to find web3. ' +
@@ -29,7 +12,7 @@ if (typeof (web3) === 'undefined') {
 
 const s = new Set()
 
-async function populateTable () {
+async function populateTable() {
   CarContract.Anomaly({}, { fromBlock: 0, toBlock: 'latest' }).get((err, evts) => {
     if (err) console.error(err)
     evts.forEach(evt => s.add(evt.transactionHash))
@@ -38,6 +21,43 @@ async function populateTable () {
 
     const table = $('#anomaly-table').DataTable({
       data
+    })
+
+    const tableData = table.rows().data()
+    const freq = {}
+
+    evts.forEach(evt => {
+      const comp = evt.args.component.toLowerCase()
+      if (comp in freq) {
+        freq[comp]++
+      } else {
+        freq[comp] = 1
+      }
+    })
+    console.log(freq)
+
+    const pieData = {
+      datasets: [{
+        data: Object.values(freq),
+        backgroundColor: [
+          'blue',
+          'red',
+          'brown',
+          'green',
+          'orange',
+          'yellow',
+          'purple'
+
+        ]
+      }],
+
+      // These labels appear in the legend and in the tooltips when hovering different arcs
+      labels: Object.keys(freq)
+    }
+    var myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: pieData,
+      options: {}
     })
 
     CarContract.Anomaly().watch((err, evt) => {
@@ -49,12 +69,13 @@ async function populateTable () {
       console.log('Got event: ', evt)
 
       const rowNode = table.row
-        .add([ evt.args.carId, evt.args.component, new Date(parseInt(evt.args.time.toString()) * 1000) ])
+        .add([evt.args.carId, evt.args.component, new Date(parseInt(evt.args.time.toString()) * 1000)])
         .draw()
-        // .node()
+
+      // .node()
       // $(rowNode)
-        // .css('color', 'red')
-        // .animate({ color: 'black' })
+      // .css('color', 'red')
+      // .animate({ color: 'black' })
     })
   })
 }
