@@ -460,12 +460,6 @@ $(document).ready(function () {
   })
 
   $('.set-full-height').css('height', 'auto')
-
-  // document.getElementById('btn-book-ride').click((eve) => {
-  //   eve.preventDefault()
-    
-  // })
-
 })
 
 
