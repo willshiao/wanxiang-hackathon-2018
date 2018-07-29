@@ -64,20 +64,36 @@ if (typeof (web3) === 'undefined') {
   showFields()
 }
 
+function handleError (err) {
+  Swal({
+    title: 'Error',
+    text: 'An error occurred: ' + err.message,
+    type: 'error'
+  })
+}
+
 // Return button clicked
 $('#return-form').submit(async (evt) => {
   evt.preventDefault()
-  await promisify(cb => CarContract.returnCar(reservedCarId, $('#return-location').val(), cb))
+  try {
+    await promisify(cb => CarContract.returnCar(reservedCarId, $('#return-location').val(), cb))
 
-  $('#book-col').show()
-  $('#return-col').hide()
-  $('#out-details').html('')
+    $('#book-col').show()
+    $('#return-col').hide()
+    $('#out-details').html('')
+    Swal({
+      title: 'Success!',
+      text: 'Successfully returned ride!',
+      type: 'success'
+    })
+  } catch (e) {
+    handleError(e)
+  }
 })
 
 function createTableRow(data) {
   if (data.args !== undefined) data = data.args
-  $('#history-table-body')
-    .prepend(`<tr><td>${data.carId}</td><td>${data.location}</td><td>${data.reservedBy}</td></tr>`)
+  $('#history-table-body').prepend(`<tr><td>${data.carId}</td><td>${data.location}</td><td>${data.reservedBy}</td></tr>`)
 }
 
 $('#history-tab').click(async evt => {
@@ -85,9 +101,10 @@ $('#history-tab').click(async evt => {
   CarContract.ReserveCar({}, { fromBlock: 0, toBlock: 'latest' }).get((err, evtResult) => {
     if (err) console.error(err)
     console.log(evtResult)
+    $('#history-table-body').html('')
     evtResult.forEach(createTableRow)
   })
-
+  
   CarContract.ReserveCar().watch((err, result) => {
     if (err) console.error(err)
     console.log('Got event: ', result)
@@ -99,11 +116,20 @@ $('#history-tab').click(async evt => {
 
 $('#submit-form').submit(async (evt) => {
   evt.preventDefault()
-  const carId = await promisify(cb => CarContract.findCar(2, 1e10, cb))
-  console.log('Found free car:', carId.toString())
-  const res = await promisify(cb => CarContract.reserveCar(carId, $('#current-location').val(), { value: 10000 }, cb))
-  populateCarInfo(carId)
-  
-  $('#book-col').hide()
-  $('#return-col').show()
+  try {
+    carId = await promisify(cb => CarContract.findCar(2, 1e10, cb))
+    console.log('Found free car:', carId.toString())
+    const res = await promisify(cb => CarContract.reserveCar(carId, $('#current-location').val(), { value: 10000 }, cb))
+    populateCarInfo(carId)
+    
+    $('#book-col').hide()
+    $('#return-col').show()
+    Swal({
+      title: 'Success!',
+      text: 'Successfully reserved ride!',
+      type: 'success'
+    })
+  } catch (e) {
+    handleError(e)
+  }
 })
