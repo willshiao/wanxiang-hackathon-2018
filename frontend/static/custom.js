@@ -1,3 +1,5 @@
+let CarContract
+
 const carDetails = {
   '0': 'Honda Accord',
   '1': 'Toyota Corolla',
@@ -23,6 +25,10 @@ function populateCarInfo (id) {
     <label>Car Model: ${carDetails[carManufacturer]}</label>`
 }
 
+async function hasReserved () {
+  return promisify(cb => CarContract.hasReserved(cb))
+}
+
 /**
  * Begin blockchain stuff
  */
@@ -33,7 +39,15 @@ if (abi === undefined) {
   console.error('abi not found')
 }
 
-let CarContract
+async function showFields () {
+  if (await hasReserved()) {
+    $('#return-col').show()
+    const carId = await promisify(cb => CarContract.getReserved(cb))
+    populateCarInfo(carId)
+  } else {
+    $('#book-col').show()
+  }
+}
 
 if (typeof (web3) === 'undefined') {
   console.error('Unable to find web3. ' +
@@ -41,7 +55,13 @@ if (typeof (web3) === 'undefined') {
 } else {
   web3 = new Web3(web3.currentProvider)
   CarContract = web3.eth.contract(abi).at(address)
+  showFields()
 }
+
+// Return button clicked
+$('#btn-return-ride').click((evt) => {
+  promisify(cb => CarContract.returnCar())
+})
 
 $('#submit-form').submit(async (evt) => {
   evt.preventDefault()

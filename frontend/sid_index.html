@@ -69,7 +69,7 @@
           <!-- Wizard container -->
           <div class="wizard-container">
             <div class="card wizard-card" data-color="red" id="wizard">
-              <form action="" method="" id="submit-form">
+              <!-- <form action="" method="" id="submit-form"> -->
                 <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
                 
                 <div class="wizard-header">
@@ -100,15 +100,22 @@
                       </div>
                       <div class="col-sm-12">
                         <div class="row">
-                          <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                              <label class="control-label">Current Location</label>
-                              <input name="currentLocation" type="text" class="form-control" id="current-location">
+                          <form action="" id="submit-form">
+                            <div class="col-sm-6" id="book-col" style="display: none;">
+                              <div class="form-group label-floating">
+                                <label class="control-label">Current Location</label>
+                                <input name="currentLocation" type="text" class="form-control" id="current-location">
+                              </div>
+                              <button class="btn btn-fill btn-success btn-wd" id="btn-book-ride">Book Ride</button>
                             </div>
-                            <button class="btn btn-fill btn-success btn-wd" id="btn-book-ride">Book Ride</button>
+                          </form>
+                          
+                          <div class="col-sm-6" id="return-col" style="display: none;">
+                            <button class="btn btn-fill btn-success btn-wd" id="btn-return-ride">Return Ride</button>
                           </div>
-                          <div class="col-sm-6" id="out-details"></div>
                         </div>
+
+                        <div class="col-sm-6" id="out-details"></div>
                       </div>
                     </div>
                   </div>
@@ -151,7 +158,7 @@
               -->
               <div class="clearfix"></div>
             </div>
-          </form>
+          <!-- </form> -->
         </div>
       </div>
       <!-- wizard container -->
