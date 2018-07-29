@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link rel="stylesheet" href="static/style.css">
+	<link rel="stylesheet" href="static/custom.css">
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="static/main.js"></script>
@@ -17,7 +18,9 @@
 
 <body>
     <div class="image-container set-full-height" style="background-image: url('http://demos.creative-tim.com/material-bootstrap-wizard/assets/img/wizard-book.jpg')">
-	         <div class="logo-container">
+		<div class="container-fluid">	 
+			<div class="row">
+			<div class="col-sm-6 logo-container">
 	            <div class="logo">
 	                <img src="http://demos.creative-tim.com/material-bootstrap-wizard/assets/img/new_logo.png">
 	            </div>
@@ -25,9 +28,14 @@
 	                Jetson
 				</div>
 			</div>
-					<div class="d-flex nav-item dropdown pull-right mr-auto ml-auto">
+			<div class="d-flex nav-item dropdown" style="
+			right: 120px;
+			position: absolute;
+			top: 20px;
+			z-index: 3;
+			">
 						<a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fa fa-bell"></i>
+								<i class="fa fa-bell" aria-hidden="true" style="font-size: 20px; color: honeydew;"></i>
 							  </a>
 							  <ul class="dropdown-menu">
 									<li class="head text-light bg-dark">
@@ -38,10 +46,7 @@
 										</div>
 									</li>
 									<li class="notification-box">
-									  <div class="row">
-										<div class="col-lg-3 col-sm-3 col-3 text-center">
-										  <img src="image/prof.jpg" class="w-50 rounded-circle">
-										</div>    
+									  <div class="row">   
 										<div class="col-lg-8 col-sm-8 col-8">
 										  <strong class="text-info">David John</strong>
 										  <div>
@@ -54,10 +59,10 @@
 									<li class="footer bg-dark text-center">
 									  <a href="" class="text-light">View All</a>
 									</li>
-								  </ul>
-			  
+								  </ul>  
+							</div>
 						</div>
-
+					</div>
 	    <!--   Big container   -->
 	    <div class="container">
 	        <div class="row">
