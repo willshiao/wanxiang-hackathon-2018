@@ -9,8 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<link rel="stylesheet" href="static/style.css">
 	<link rel="stylesheet" href="static/custom.css">
+	<link rel="stylesheet" href="static/style.css">
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="static/main.js"></script>
@@ -93,15 +93,17 @@
 			                            	<div class="col-sm-12">
 			                                	<h4 class="info-text"> Let's Book a ride</h4>
 			                            	</div>
-		                                	<div class="col-sm-6">
-												<div class="input-group">
+		                                	<div class="col-sm-12">
+												<div class="row"> 
+												<div class="col-sm-6">
 														<div class="form-group label-floating">
 																<label class="control-label">Destination</label>
 																<input name="name" type="text" class="form-control">
 														  </div>
-													<button class="btn btn-fill btn-success btn-wd">Book Ride</button>
+													<button class="btn btn-fill btn-success btn-wd" id="btn-book-ride">Book Ride</button>
 												</div>
-
+												<div class="col-sm-6" id="out-details"></div>
+											</div>
 		                                	</div>
 		                            	</div>
 		                            </div>
