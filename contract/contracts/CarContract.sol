@@ -43,10 +43,10 @@ contract CarContract is Ownable {
 
     Car[] public fleet;
 
-    function createCar (uint8 _numSeats, uint _price) public onlyOwner {
+    function createCar (uint8 _numSeats, uint _price, address carAddress) public onlyOwner {
         Car memory car = Car(_numSeats, _price, false, false, now, 0);
         uint carId = fleet.push(car) - 1;
-        addressToCarId[msg.sender] = carId;
+        addressToCarId[carAddress] = carId;
         emit NewCar(carId);
     }
     
@@ -54,6 +54,8 @@ contract CarContract is Ownable {
         uint carId = addressToCarId[msg.sender];
         Car storage car = fleet[carId];
 
+        // Require car to exist in map
+        require(car.numSeats > 0);
         require(!car.disabled);
 
         emit Anomaly(carId, car.reservedTo, car.reserved, now, _component);

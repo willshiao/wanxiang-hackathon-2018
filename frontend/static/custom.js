@@ -34,8 +34,6 @@ async function hasReserved () {
  * Begin blockchain stuff
  */
 
-const address = '0x18bedb90f28edd289267bd1b772acb4d405368e4'
-
 if (abi === undefined) {
   console.error('abi not found')
 }
@@ -56,8 +54,8 @@ async function showFields () {
 }
 
 if (typeof (web3) === 'undefined') {
-  // console.error('Unable to find web3. ' +
-  // 'Please run MetaMask (or something else that injects web3).')
+  console.error('Unable to find web3. ' +
+  'Please run MetaMask (or something else that injects web3).')
   web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"))
   CarContract = web3.eth.contract(abi).at(address)
   showFields()

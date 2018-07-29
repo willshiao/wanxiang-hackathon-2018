@@ -27,9 +27,6 @@ function waitForReceipt (hash, cb) {
   })
 }
 
-// var address = "0xf15090c01bec877a122b567e5552504e5fd22b79"
-const address = '0xfdfa19c8a971e3203a9989ae878fe42c64451f0a'
-
 if (abi === undefined) {
   console.error('abi not found')
 }

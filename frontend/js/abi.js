@@ -9,6 +9,7 @@ const promisify = (inner) =>
     })
   )
 
+const address = '0xd1abc5905c4c300cd8356ac1a01b29b75d73d878'
 const abi = [
 	{
 		"anonymous": false,
@@ -52,6 +53,10 @@ const abi = [
 			{
 				"name": "_price",
 				"type": "uint256"
+			},
+			{
+				"name": "carAddress",
+				"type": "address"
 			}
 		],
 		"name": "createCar",
