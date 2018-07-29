@@ -22,8 +22,8 @@ option = null;
 app.title = 'Anomalies detected';
 
 var data = [
-    [[28604,77,17096869,'part anomalies','window']],
-    [[44056,81.8,23968973,'traffic violation','overspeeding']]
+    [[2,2,17096869,'part anomalies','window'],[4,20,1706123249,'part anomalies','window'],[6,12,17096869,'part anomalies','window'],[10,2,170968690,'part anomalies','window'],[20,2,1709686,'part anomalies','window'],[25,24,17096869,'part anomalies','window'],[26,28,170963469,'part anomalies','window'],[24,2,170129669,'part anomalies','window'],[25,24,17096869,'part anomalies','window'],[22,24,161234869,'part anomalies','window'],[20,2,17012869,'part anomalies','window'],[45,2,17096869,'part anomalies','window']],
+    [[2,3,23968973,'traffic violation','overspeeding'],[20,3,239689473,'traffic violation','overspeeding'],[25,31,2396845973,'traffic violation','overspeeding'],[30,34,2396822973,'traffic violation','overspeeding']]
 ];
 
 option = {
@@ -57,7 +57,7 @@ option = {
         scale: true
     },
     series: [{
-        name: '1990',
+        name: 'part anomalies',
         data: data[0],
         type: 'scatter',
         symbolSize: function (data) {
@@ -87,7 +87,7 @@ option = {
             }
         }
     }, {
-        name: '2015',
+        name: 'traffic violation',
         data: data[1],
         type: 'scatter',
         symbolSize: function (data) {
